@@ -1340,11 +1340,15 @@ body { margin: 0; padding: 0; background-color: #FDFCFB; }
 }
     
 
-/* Hero copy sits on the left on wider screens (phones keep the right-aligned layout) */
-@media (min-width: 601px) {
-  #hero .hero-copy { align-items: flex-start; text-align: left; }
-  #hero .hero-tags { justify-content: flex-start; }
-  #hero .hero-shade { background-image: linear-gradient(to right, rgb(0 0 0 / 0.4), transparent, transparent); }
+/* Hero: photo sits right, copy sits left (all widths) */
+#hero .hero-copy { align-items: flex-start; text-align: left; }
+#hero .hero-tags { justify-content: flex-start; }
+#hero .hero-shade { background-image: linear-gradient(to right, rgb(0 0 0 / 0.5), rgb(0 0 0 / 0.15) 45%, transparent 65%); }
+/* Phones and portrait screens: copy drops to the bottom-left, clear of the face */
+@media (max-width: 600px), (max-aspect-ratio: 1/1) {
+  #hero .hero-copy { justify-content: flex-end; padding-bottom: 2rem; }
+  #hero .hero-shade { background-image: linear-gradient(to top, rgb(0 0 0 / 0.55), transparent 55%); }
+}
 }
 
 /* Wider touch screens: let sideways swipes drive the reels carousel, vertical ones scroll the page */
@@ -1352,8 +1356,4 @@ body { margin: 0; padding: 0; background-color: #FDFCFB; }
   .reels-shop__wrapper { touch-action: pan-y; }
 }
 
-/* Wide screens: frame the hero photo so the top of the head sits just below the top edge.
-   The photo is 3:4, so its rendered height is 133.33vw and the head starts ~19% down (25.3vw). */
-@media (min-width: 769px) {
-  #hero .hero-magazine__bg-img { object-position: 55% min(0px, calc(5vh - 25.3vw)) !important; }
-}
+
